@@ -44,3 +44,13 @@ This technique is called Hybrid Cryptography.
 3. Upon receiving the encrypted text and encrypted secret key on server side, the server will decrypt the encrypted secret key using private key. Afterwards, the server will retrieve the original text transmitted by the client by decrypting the encrypted text using secret key (decrypted). The following class will help you in the same:
 
 `ServerDecrypt.java`
+
+# Encryption for browser
+
+- AES https://www.npmjs.com/package/crypto-js
+- RSA https://github.com/wwwtyro/cryptico
+
+# Encryption for iOS
+
+https://github.com/dmitrykolesnikovich/encryption-sample-project-ios
+
