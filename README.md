@@ -35,12 +35,12 @@ This technique is called Hybrid Cryptography.
 
 1. First of all server needs to generates a key pair using RSA. This will be done via the following class: (Note that this code needs to be run only 1 time as you’ll use the same key pair going forward)
 
-`GenerateRsaKeyPair`
+`GenerateRsaKeyPair.java`
 
 2. On client side, to generate secret key at runtime, encrypt sensitive string using secret key, and encrypt secret key using public key, this class will help you:
 
-`ClientEncrypt`
+`ClientEncrypt.java`
 
 3. Upon receiving the encrypted text and encrypted secret key on server side, the server will decrypt the encrypted secret key using private key. Afterwards, the server will retrieve the original text transmitted by the client by decrypting the encrypted text using secret key (decrypted). The following class will help you in the same:
 
-`ServerDecrypt`
+`ServerDecrypt.java`
