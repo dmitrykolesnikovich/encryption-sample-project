@@ -14,8 +14,8 @@ import static encryptionSample.Utils.readFile;
 public class ServerDecrypt {
 
   private static final String privateKey = readFile("privateKey.txt");
-  private static final String encryptedTextString = readFile("message-encrypted.txt");
-  private static final String encryptedSecretKeyString = readFile("secretKey-encrypted.txt");
+  private static final String encryptedMessage = readFile("message-encrypted.txt");
+  private static final String encryptedSecretKey = readFile("secretKey-encrypted.txt");
 
   public static void main(String[] args) throws Throwable {
     // 1. Get private key
@@ -26,14 +26,14 @@ public class ServerDecrypt {
     // 2. Decrypt encrypted secret key using private key
     Cipher cipher1 = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
     cipher1.init(Cipher.DECRYPT_MODE, privateKey);
-    byte[] secretKeyBytes = cipher1.doFinal(Base64.decode(encryptedSecretKeyString, Base64.DEFAULT));
+    byte[] secretKeyBytes = cipher1.doFinal(Base64.decode(encryptedSecretKey, Base64.DEFAULT));
     SecretKey secretKey = new SecretKeySpec(secretKeyBytes, 0, secretKeyBytes.length, "AES");
 
     // 3. Decrypt encrypted message using secret key
     SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[16]));
-    byte[] messageBytes = cipher.doFinal(Base64.decode(encryptedTextString, Base64.DEFAULT));
+    byte[] messageBytes = cipher.doFinal(Base64.decode(encryptedMessage, Base64.DEFAULT));
     String message = new String(messageBytes, Charset.forName("UTF-8"));
 
     // print result

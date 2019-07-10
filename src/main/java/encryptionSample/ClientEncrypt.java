@@ -15,7 +15,7 @@ import static encryptionSample.Utils.readFile;
 public class ClientEncrypt {
 
   private static final String publicKeyString = readFile("publicKey.txt");
-  private static final String text = readFile("message.txt");
+  private static final String message = readFile("message.txt");
 
   public static void main(String[] args) throws Throwable {
     // 1. generate secret key using AES
@@ -27,7 +27,7 @@ public class ClientEncrypt {
     SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getEncoded(), "AES");
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(new byte[16]));
-    String cipherTextString = Base64.encodeToString(cipher.doFinal(text.getBytes(Charset.forName("UTF-8"))), Base64.DEFAULT);
+    String messageEncrypted = Base64.encodeToString(cipher.doFinal(message.getBytes(Charset.forName("UTF-8"))), Base64.DEFAULT);
 
     // 3. get public key
     X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Base64.decode(publicKeyString, Base64.DEFAULT));
@@ -37,11 +37,11 @@ public class ClientEncrypt {
     // 4. encrypt secret key using public key
     Cipher cipher2 = Cipher.getInstance("RSA/ECB/OAEPWithSHA1AndMGF1Padding");
     cipher2.init(Cipher.ENCRYPT_MODE, publicKey);
-    String encryptedSecretKey = Base64.encodeToString(cipher2.doFinal(secretKey.getEncoded()), Base64.DEFAULT);
+    String secretKeyEncrypted = Base64.encodeToString(cipher2.doFinal(secretKey.getEncoded()), Base64.DEFAULT);
 
     // print result
-    System.out.println("cipherTextString: '" + cipherTextString + "'");
-    System.out.println("encryptedSecretKey: '" + encryptedSecretKey + "'");
+    System.out.println("messageEncrypted: '" + messageEncrypted + "'");
+    System.out.println("secretKeyEncrypted: '" + secretKeyEncrypted + "'");
   }
 
 }
