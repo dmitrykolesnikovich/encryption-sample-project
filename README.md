@@ -47,8 +47,8 @@ This technique is called Hybrid Cryptography.
 
 # Encryption for browser
 
-- AES https://www.npmjs.com/package/crypto-js
 - RSA https://github.com/wwwtyro/cryptico
+- AES https://www.npmjs.com/package/crypto-js
 
 # Encryption for iOS
 
