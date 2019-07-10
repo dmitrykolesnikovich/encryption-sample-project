@@ -1,15 +1,13 @@
-# How to encrypt data on client and decrypt in on server
-
 This repository is based on following article https://medium.com/mindorks/how-to-pass-large-data-between-server-and-client-android-securely-345fed551651
 
-How to pass large data between server and client (android) securely?
+# How to pass large data between server and client (android) securely?
 
-Using RSA and AES (Hybrid) encryption technique
+### Using RSA and AES (Hybrid) encryption technique
 
 Most of the times, we pass sensitive data from our Android app to our server. Such sensitive data could be a personal message one user is sending to another, could be an information about the user, could be user’s SMS, so on and so forth. While we should always explicitly inform users before transferring such sensitive data, but we should also make sure we transfer this data as securely as possible.
 It shouldn’t surprize you that companies have faced huge financial losses due to poor security, and it has lead to shut down of companies as well. Another surprize is that implementing this isn’t complicated at all! With little knowledge you can create a rock solid security for the client — server communication.
 
-ABC of Encryption
+### ABC of Encryption
 
 Consider you have a sensitive information say user’s email ID. You want to securely transfer it to your server. How will you do it? Hmm.. one way could be to encrypt it using a passcode. Client will use this passcode to encrypt user’s email ID and send to the server. Server will, in turn, use the same passcode to decrypt the data received from the client. If during the transmission of the data someone gets access to the transmitting data, he/ she wouldn’t be able to make sense of it as it is encrypted. Also, since the intruder doesn’t have access to the passcode, he/ she wouldn’t be able to decrypt the data.
 This kind of encryption technique is called symmetric encryption. It is fast and can encrypt large texts of data. The drawback includes safe distribution of the key. Also, you need to ship the key in your app — which is a highly unrecommended practice. The most popular Symmetric Algorithms are DES, Triple-DES, AES, Blowfish, RC2, RC4(ARCFOUR), RC5, RC6.
@@ -18,7 +16,7 @@ What to do now? What if there was an encryption technique where the algorithm wo
 This kind of encryption technique is called asymmetric encryption. It is comparatively very slow and can encrypt only very small texts of data at a time (128 bytes to be exact!). The most popular Asymmetric Algorithms (aka Public Key Algorithms) are RSA, Diffie-Hellman, ElGamal, DSS.
 So now it is clear that you can’t use symmetric encryption because you can’t ship the passcode in your app. Also, it is impractical to use asymmetric encryption because 99% of the times the data that you’d want to transfer would be of more than 128 bytes in size! What to do?
 
-Hybrid solution to the rescue!
+### Hybrid solution to the rescue!
 
 Consider this:
 Using an asymmetric encryption (say RSA), the server generates a key pair consisting of a public key and a private key.
@@ -33,7 +31,7 @@ Server uses private key to decrypt the encrypted secret key.
 Server uses decrypted secret key (or simply called secret key) to decrypt the encrypted data. Hence it gets the large texts of data which was sent by the client securely.
 This technique is called Hybrid Cryptography.
 
-Show me the code!
+### Show me the code!
 
 1. First of all server needs to generates a key pair using RSA. This will be done via the following class: (Note that this code needs to be run only 1 time as you’ll use the same key pair going forward)
 

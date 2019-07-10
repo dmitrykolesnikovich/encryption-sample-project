@@ -37,7 +37,7 @@ public class ServerDecrypt {
     byte[] original = cipher.doFinal(Base64.decode(encryptedTextString, Base64.DEFAULT));
     String message = new String(original, Charset.forName("UTF-8"));
 
-    // 4. print result
+    // print result
     System.out.println("message: '" + message + "'");
   }
 }

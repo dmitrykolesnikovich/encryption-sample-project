@@ -40,7 +40,7 @@ public class ClientEncrypt {
     cipher2.init(Cipher.ENCRYPT_MODE, publicKey);
     String encryptedSecretKey = Base64.encodeToString(cipher2.doFinal(secretKey.getEncoded()), Base64.DEFAULT);
 
-    // 5. print result
+    // print result
     System.out.println("cipherTextString: '" + cipherTextString + "'");
     System.out.println("encryptedSecretKey: '" + encryptedSecretKey + "'");
   }

@@ -13,7 +13,7 @@ public class GenerateRsaKeyPair {
     String privateKeyString = Base64.encodeToString(keyPair.getPrivate().getEncoded(), Base64.DEFAULT);
     String publicKeyString = Base64.encodeToString(keyPair.getPublic().getEncoded(), Base64.DEFAULT);
 
-    // 2. print result
+    // print result
     System.out.println("privateKey: '" + privateKeyString + "'");
     System.out.println("publicKey: '" + publicKeyString + "'");
   }
